@@ -9,10 +9,16 @@ namespace MessengerAPI.Controllers
     [Route("api/[controller]")]
     public class ChatController : ControllerBase
     {
-         private ChatManager _userManager;
+        private ChatManager _chatManager;
 
         public ChatController(ChatManager manager) {
-            _userManager = manager;
+            _chatManager = manager;
+        }
+
+        [Authorize]
+        [HttpPost("newchannel")]
+        public Task<IActionResult> CreateChatChannel(){
+            
         }
 
     }
