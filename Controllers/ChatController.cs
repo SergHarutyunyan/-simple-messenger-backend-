@@ -18,8 +18,9 @@ namespace MessengerAPI.Controllers
         [Authorize]
         [HttpPost("newchannel")]
         public Task<IActionResult> CreateChatChannel(){
-            
+
         }
+        
 
     }
 }
