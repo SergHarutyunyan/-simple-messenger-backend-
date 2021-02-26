@@ -3,13 +3,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using MessengerAPI.Models;
-using MessengerAPI.Managers;
+using simple_messenger_backend.Models;
+using simple_messenger_backend.Managers;
 using System;
 using System.Text;
 using System.Security.Claims;
 
-namespace MessengerAPI.Handler
+namespace simple_messenger_backend.Handler
 {
     public class AuthHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {

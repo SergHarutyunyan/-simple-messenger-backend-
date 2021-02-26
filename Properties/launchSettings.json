@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "MessengerAPI": {
+    "simple_messenger_backend": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

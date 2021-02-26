@@ -4,12 +4,12 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using MessengerAPI.Connectivity;
-using MessengerAPI.Models;
+using simple_messenger_backend.Connectivity;
+using simple_messenger_backend.Models;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.EntityFrameworkCore;
 
-namespace MessengerAPI.Managers
+namespace simple_messenger_backend.Managers
 {
     public class UserManager
     {

@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
-using SignalR.MessengerAPI.Models;
+using simple_messenger_backend.Models;
 
-namespace SignalR.MessengerAPI.Hubs.Clients
+namespace simple_messenger_backend.Hubs.Clients
 {
     public interface IChatClient
     {
-        Task ReceiveMessage(ChatMessage message);
+        Task ReceiveMessage(Message message);
     }
 }

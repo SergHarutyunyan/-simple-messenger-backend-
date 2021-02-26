@@ -1,18 +1,21 @@
 using System.Linq;
-using MessengerAPI.Models;
+using simple_messenger_backend.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace MessengerAPI.Connectivity
+namespace simple_messenger_backend.Connectivity
 {
     public class Context : DbContext
     {
-         public Context(DbContextOptions options)
+        public Context(DbContextOptions options)
           : base(options)
         {
 
         }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<ChatChannel> Channels { get; set; }
+        public DbSet<Message> Messages { get; set; }
        
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
@@ -20,9 +23,8 @@ namespace MessengerAPI.Connectivity
             {
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
-
+          
             base.OnModelCreating(modelbuilder);
         }
-
     }
 }

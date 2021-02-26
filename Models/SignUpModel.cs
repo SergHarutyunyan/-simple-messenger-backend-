@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace MessengerAPI.Models
+namespace simple_messenger_backend.Models
 {
     public class SignUpModel
     {

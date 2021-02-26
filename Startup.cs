@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MessengerAPI.Connectivity;
-using MessengerAPI.Handler;
-using MessengerAPI.Managers;
+using simple_messenger_backend.Connectivity;
+using simple_messenger_backend.Handler;
+using simple_messenger_backend.Managers;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,9 +16,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using SignalR.MessengerAPI.Hubs;
+using simple_messenger_backend.Hubs;
 
-namespace MessengerAPI
+namespace simple_messenger_backend
 {
     public class Startup
     {
@@ -36,13 +36,14 @@ namespace MessengerAPI
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MessengerAPI", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "simple_messenger_backend", Version = "v1" });
             });
 
             services.AddAuthentication("BasicAuthentication")
                 .AddScheme<AuthenticationSchemeOptions, AuthHandler>("BasicAuthentication", null);
 
             services.AddScoped<UserManager>();
+            services.AddScoped<ChatManager>();
 
             services.AddDbContextPool<Context>(options => options.UseSqlServer(Configuration.GetConnectionString("Messenger")));
            
@@ -59,7 +60,7 @@ namespace MessengerAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MessengerAPI v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "simple_messenger_backend v1"));
             }
 
             //app.UseHttpsRedirection();

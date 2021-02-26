@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MessengerAPI.Managers;
-using MessengerAPI.Models;
+using simple_messenger_backend.Managers;
+using simple_messenger_backend.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MessengerAPI.Controllers
+namespace simple_messenger_backend.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

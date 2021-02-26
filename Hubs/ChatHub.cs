@@ -1,14 +1,14 @@
 using System.Threading.Tasks;
-using SignalR.MessengerAPI.Models;
+using simple_messenger_backend.Models;
 using Microsoft.AspNetCore.SignalR;
-using SignalR.MessengerAPI.Hubs.Clients;
+using simple_messenger_backend.Hubs.Clients;
 
 
-namespace SignalR.MessengerAPI.Hubs
+namespace simple_messenger_backend.Hubs
 {
     public class ChatHub : Hub<IChatClient>
     {
-        public async Task SendMessage(ChatMessage message)
+        public async Task SendMessage(Message message)
         {
             await Clients.All.ReceiveMessage(message);
         }

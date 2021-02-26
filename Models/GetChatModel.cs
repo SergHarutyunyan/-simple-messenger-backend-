@@ -2,12 +2,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace simple_messenger_backend.Models
 {
-    public class LoginModel
+    public class GetChatModel
     {
        [Required]
-       public string Email { get; set; }
+       public string User1 { get; set; }
        
        [Required]
-       public string Password { get ; set; }
+       public string User2 { get ; set; }
     }
 }

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MessengerAPI.Models
+namespace simple_messenger_backend.Models
 {
     [Table("User")]
     public class User
