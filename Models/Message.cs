@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,14 +12,15 @@ namespace simple_messenger_backend.Models
         public int ID { get; set; }
 
         [Required(ErrorMessage = "From is required")]
-        public string From { get; set; }
+        public User From { get; set; }
 
         [Required(ErrorMessage = "From is required")]
-        public string To { get; set; }
+        public User To { get; set; }
 
         [Required(ErrorMessage = "From is required")]
         public string MessageText { get; set; }
 
-        public ChatChannel Channel { get; set;}
+        [Required(ErrorMessage = "Send time is required")]
+        public DateTime SendTime { get; set; }
     }
 }

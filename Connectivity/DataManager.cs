@@ -4,17 +4,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace simple_messenger_backend.Connectivity
 {
-    public class Context : DbContext
+    public class DataManager : DbContext
     {
-        public Context(DbContextOptions options)
+        public DataManager(DbContextOptions options)
           : base(options)
         {
 
         }
 
         public DbSet<User> Users { get; set; }
-
-        public DbSet<ChatChannel> Channels { get; set; }
         public DbSet<Message> Messages { get; set; }
        
         protected override void OnModelCreating(ModelBuilder modelbuilder)

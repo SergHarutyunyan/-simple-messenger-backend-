@@ -45,16 +45,15 @@ namespace simple_messenger_backend
             services.AddScoped<UserManager>();
             services.AddScoped<ChatManager>();
 
-            services.AddDbContextPool<Context>(options => options.UseSqlServer(Configuration.GetConnectionString("Messenger")));
-           
-            
-            services.AddMvc();
+            services.AddDbContextPool<DataManager>(options => options.UseSqlServer(Configuration.GetConnectionString("Messenger")));
 
             services.AddSignalR();
+            
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Context context)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataManager context)
         {
             if (env.IsDevelopment())
             {
@@ -64,13 +63,16 @@ namespace simple_messenger_backend
             }
 
             //app.UseHttpsRedirection();
-
+      
             app.UseRouting();
 
             app.UseCors(
-                options => options.WithOrigins("http://localhost:3000").AllowAnyHeader().AllowAnyMethod()
+                options => options.WithOrigins("http://localhost:3000")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials()
             );
-
+        
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -79,7 +81,7 @@ namespace simple_messenger_backend
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<ChatHub>("/api/chat");
+                endpoints.MapHub<ChatHub>("/api/chathub");
             });
         }
     }

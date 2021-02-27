@@ -33,7 +33,7 @@ namespace simple_messenger_backend.Handler
 
             string token = !Request.Headers.ContainsKey("Authorization") ? Request.Query["access_token"] : Request.Headers["Authorization"];
             User user = null;
-
+            
             try
             {
                 var credentialBytes = Convert.FromBase64String(token);

@@ -13,18 +13,19 @@ namespace simple_messenger_backend.Managers
 {
     public class UserManager
     {
-        private Context _dbContext;
+        private DataManager _dbContext;
 
-        public UserManager(Context context){
+        public UserManager(DataManager context){
             _dbContext = context;
         }
 
-        public async Task<List<string>> GetAllUsers(string currentUser) {
-            List<string> usernameList = new List<string>();
+        public async Task<List<UserStatus>> GetAllUsers(string currentUser) {
+            List<UserStatus> usernameList = new List<UserStatus>();
 
             foreach(User user in await _dbContext.Users.ToListAsync()) {
-                if(user.Username != currentUser)
-                    usernameList.Add(user.Username);
+                if(user.Username != currentUser) {
+                    usernameList.Add(new UserStatus {Username = user.Username, Connected = user.Connected});
+                }               
             }            
 
             return usernameList;
@@ -73,18 +74,17 @@ namespace simple_messenger_backend.Managers
                     Email = email,
                     Username = username,
                     Password = hashPassword(password),
-                    RegistrationDate = DateTime.Now.ToString("dd.MM.yyyy hh:mm:ss")
+                    RegistrationDate = DateTime.Now.ToString("dd.MM.yyyy hh:mm:ss"),
+                    Connected = false
                 };
 
                 _dbContext.Users.Add(user);
                 _dbContext.SaveChanges();
                 
                 user.AuthenticationData = Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Join(":", user.Email, user.Username, user.Password)));
-
-                return user;
             }
 
-            return null;           
+            return user;           
         }
 
         private string hashPassword(string password){

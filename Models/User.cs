@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -25,5 +26,7 @@ namespace simple_messenger_backend.Models
         [NotMapped]
         public string AuthenticationData { get; set; }
 
+        [Required(ErrorMessage = "Connection Status is required")]
+        public bool Connected {get; set;}
     }
 }
