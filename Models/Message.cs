@@ -14,10 +14,10 @@ namespace simple_messenger_backend.Models
         [Required(ErrorMessage = "From is required")]
         public User From { get; set; }
 
-        [Required(ErrorMessage = "From is required")]
+        [Required(ErrorMessage = "To is required")]
         public User To { get; set; }
 
-        [Required(ErrorMessage = "From is required")]
+        [Required(ErrorMessage = "MessageText is required")]
         public string MessageText { get; set; }
 
         [Required(ErrorMessage = "Send time is required")]

@@ -18,13 +18,13 @@ namespace simple_messenger_backend.Controllers
             _chatManager = manager;
         }
 
-        // [Authorize]
-        // [HttpPost("getchannel")]
-        // public async Task<IActionResult> GetChannel([FromBody] string user) 
-        // {
-        //     var channel = await _chatManager.FindChannel(user);
+        [Authorize]
+        [HttpGet("history")]
+        public async Task<IActionResult> GetChannel(string user1, string user2) 
+        {
+            var chatHistory = await _chatManager.GetChatHistory(user1, user2);
 
-        //     return Ok(new { chat = channel });
-        // }
+            return Ok(new { chat = chatHistory });
+        }
     }
 }
