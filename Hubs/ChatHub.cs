@@ -20,37 +20,44 @@ namespace simple_messenger_backend.Hubs
             _dbContext = context;
         }
 
-        public void SendChatMessage(string who, string message)
-        {
-            // var name = Context.User.Identity.Name;
-        
-            // var user = _dbContext.Users.Find(who);
-            // if (user == null)
-            // {
-            //     Clients.Caller.SendAsync("showErrorMessage", "Could not find that user.");
-            // }
-            // else
-            // {
-            //     _dbContext.Entry(user)
-            //         .Collection(u => u.Connections)
-            //         .Query()
-            //         .Where(c => c.Connected == true)
-            //         .Load();
+        public async Task<Message> SendChatMessage(string message, string from, string to)
+        {        
+            User fromUser = await _dbContext.Users.FirstOrDefaultAsync(u => u.Username.Equals(from));
+            User toUser = await _dbContext.Users.FirstOrDefaultAsync(u => u.Username.Equals(to));
 
-            //     if (user.Connections == null)
-            //     {
-            //         Clients.Caller.SendAsync("showErrorMessage", "Could not find that user.");
-            //     }
-            //     else
-            //     {
-            //         foreach (var connection in user.Connections)
-            //         {
-            //             Clients.Client(connection.ConnectionID)
-            //                 .addChatMessage(name + ": " + message);
-            //         }
-            //     }
-            // }
+            if (toUser == null)
+            {
+                await Clients.Caller.SendAsync("showErrorMessage", "Could not find that user.");
+                return null;
+            }
+            else
+            {           
+                
+                Channel channel = UserChannels.Where(c => c.User.Email.Equals(toUser.Email)).FirstOrDefault();
+                Message msg = await SaveMessage(fromUser, toUser, message);
+
+                if(channel != null) {
+                    await Clients.Client(channel.ConnectionID)
+                        .SendAsync("ReceiveMessage", new {from = msg.From.Username, to = msg.To.Username, messageText = msg.MessageText, sendTime = msg.SendTime});
+                }
+
+                return msg;           
+            }           
+        }
+
+        private async Task<Message> SaveMessage(User from, User to, string message) {
             
+            Message newMessage = new Message {
+                From = from,
+                To = to,
+                MessageText = message,
+                SendTime = DateTime.Now
+            };
+
+            await _dbContext.Messages.AddAsync(newMessage);
+            await _dbContext.SaveChangesAsync();
+
+            return newMessage;
         }
 
         public override async Task OnConnectedAsync()
