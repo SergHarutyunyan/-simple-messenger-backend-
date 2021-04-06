@@ -26,7 +26,7 @@ namespace simple_messenger_backend.Controllers
             var user = await _userManager.CreateUser(userParam.Email, userParam.Username, userParam.Password);
 
             if (user == null)
-                return BadRequest(new { message = "User already exists in database" });
+                return BadRequest(new { message = "User with same email address already exists" });
 
             return Ok(new { AccountId = user.ID, Username = user.Username, AuthenticationData = user.AuthenticationData });
         }

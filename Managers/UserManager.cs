@@ -82,9 +82,11 @@ namespace simple_messenger_backend.Managers
                 _dbContext.SaveChanges();
                 
                 user.AuthenticationData = Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Join(":", user.Email, user.Username, user.Password)));
+               
+                return user;      
             }
-
-            return user;           
+            else
+                return null;    
         }
 
         private string hashPassword(string password){
