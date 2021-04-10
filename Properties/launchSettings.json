@@ -4,7 +4,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:62336,https://hsmessengerserver.herokuapp.com",
+      "applicationUrl": "https://hsmessengerserver.herokuapp.com",
       "sslPort": 44337
     }
   },
@@ -22,7 +22,7 @@
       "dotnetRunMessages": "true",
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:5001;http://localhost:5000,https://hsmessengerserver.herokuapp.com",
+      "applicationUrl": "https://hsmessengerserver.herokuapp.com",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
