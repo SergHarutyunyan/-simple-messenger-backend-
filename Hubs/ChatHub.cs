@@ -13,10 +13,10 @@ namespace simple_messenger_backend.Hubs
     [Authorize]
     public class ChatHub : Hub
     {
-        private DataManager _dbContext;
+        private MySQLDataManager _dbContext;
         private static List<Channel> UserChannels = new List<Channel>();
 
-        public ChatHub(DataManager context) {
+        public ChatHub(MySQLDataManager context) {
             _dbContext = context;
         }
 

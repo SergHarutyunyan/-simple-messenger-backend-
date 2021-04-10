@@ -1,0 +1,21 @@
+{
+    "sqltools.connections": [
+        {
+            "mssqlOptions": {
+                "appName": "SQLTools",
+                "useUTC": true,
+                "encrypt": true,
+                "abortTransactionOnError": false
+            },
+            "previewLimit": 50,
+            "server": "hsmessenger.database.windows.net",
+            "port": 1433,
+            "driver": "MSSQL",
+            "name": "HSMessengerConnection",
+            "database": "SimpleMessenger",
+            "username": "Serg",
+            "password": "Vinlaw996",
+            "group": "InitialGroup"
+        }
+    ]
+}

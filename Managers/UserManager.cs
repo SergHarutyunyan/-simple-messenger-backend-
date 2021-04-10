@@ -13,9 +13,9 @@ namespace simple_messenger_backend.Managers
 {
     public class UserManager
     {
-        private DataManager _dbContext;
+        private MySQLDataManager _dbContext;
 
-        public UserManager(DataManager context){
+        public UserManager(MySQLDataManager context){
             _dbContext = context;
         }
 

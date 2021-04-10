@@ -17,6 +17,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using simple_messenger_backend.Hubs;
+using MySqlConnector;
 
 namespace simple_messenger_backend
 {
@@ -45,7 +46,9 @@ namespace simple_messenger_backend
             services.AddScoped<UserManager>();
             services.AddScoped<ChatManager>();
 
-            services.AddDbContextPool<DataManager>(options => options.UseSqlServer(Configuration.GetConnectionString("Messenger")));
+            // This line was for SQL server
+            //services.AddDbContextPool<DataManager>(options => options.UseSqlServer(Configuration.GetConnectionString("SQLServerMessenger")));
+            services.AddDbContextPool<MySQLDataManager>(options => options.UseMySQL(Configuration.GetConnectionString("MySQLServerMessenger")));
 
             services.AddSignalR();
             
@@ -53,7 +56,7 @@ namespace simple_messenger_backend
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataManager context)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MySQLDataManager context)
         {
             if (env.IsDevelopment())
             {
@@ -67,7 +70,7 @@ namespace simple_messenger_backend
             app.UseRouting();
 
             app.UseCors(
-                options => options.WithOrigins("http://localhost:3000")
+                options => options.WithOrigins("http://localhost:3000", "https://hsmessenger.herokuapp.com")
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials()

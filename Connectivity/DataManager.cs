@@ -9,7 +9,7 @@ namespace simple_messenger_backend.Connectivity
         public DataManager(DbContextOptions options)
           : base(options)
         {
-
+            
         }
 
         public DbSet<User> Users { get; set; }

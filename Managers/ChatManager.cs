@@ -9,9 +9,9 @@ namespace simple_messenger_backend.Managers
 {
     public class ChatManager
     {
-        private DataManager _dbContext;
+        private MySQLDataManager _dbContext;
 
-          public ChatManager(DataManager context){
+          public ChatManager(MySQLDataManager context){
             _dbContext = context;
         }
 
